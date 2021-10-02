@@ -6,24 +6,17 @@
         android:title="@string/pref_settings_title"
         android:key="pref_settings">
         <EditTextPreference
-            android:inputType="phone"
+            android:inputType="text"
             android:key="phone_number"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="@string/pref_phoneNumber_description"
             android:title="@string/pref_phoneNumber" />
-        <EditTextPreference
-            android:inputType="textUri"
-            android:key="target_URL"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:summary="@string/pref_targetURL_description"
-            android:title="@string/pref_targetURL" />
     </PreferenceCategory>
-    <PreferenceCategory
+    <!--<PreferenceCategory
         android:title="@string/pref_about">
         <dk.stacktrace.messagingforwarder.AboutDialogPreference
             android:title="@string/about_title"
             android:dialogMessage="@string/about_message" />
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 </PreferenceScreen>

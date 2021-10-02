@@ -14,12 +14,18 @@ public class SettingsActivity extends PreferenceActivity {
     private static final int REQUEST_RECEIVE_SMS = 1;
     private static final int REQUEST_SEND_SMS = 2;
     private static final int REQUEST_READ_PHONE = 3;
+    private static final int REQUEST_READ_CONTACTS = 4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Creating settings activity");
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
             Log.i(TAG, "Requesting permissions to receive SMS messages");
@@ -34,6 +40,11 @@ public class SettingsActivity extends PreferenceActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             Log.i(TAG, "Requesting permissions to send SMS messages");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE);
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            Log.i(TAG, "Requesting permissions to send SMS messages");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_READ_PHONE);
         }
     }
 

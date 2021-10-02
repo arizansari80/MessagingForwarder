@@ -9,9 +9,10 @@ import androidx.annotation.RequiresApi;
 public class ForwardMessage implements Runnable {
     private static final String TAG = HttpPostThread.class.getName();
 
-    public ForwardMessage(final String toMobileNumber, final String message) {
+    public ForwardMessage(final String toMobileNumber, final String message, final String messageFrom) {
         this.message = message;
-        ForwardMessage.toMobileNumber = toMobileNumber;
+        this.toMobileNumber = toMobileNumber;
+        this.messageFrom = messageFrom;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
@@ -23,10 +24,12 @@ public class ForwardMessage implements Runnable {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
             smsManager = SmsManager.getSmsManagerForSubscriptionId(SmsManager.getDefaultSmsSubscriptionId());
         }
-        smsManager.sendTextMessage(ForwardMessage.toMobileNumber, null, message, null, null);
+        final String finalMessage = "From:" + messageFrom + "\r\n" + message;
+        smsManager.sendTextMessage(this.toMobileNumber, null, finalMessage, null, null);
     }
 
     private final String message;
-    private static String toMobileNumber;
+    private final String toMobileNumber;
+    private final String messageFrom;
 }
 
